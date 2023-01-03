@@ -4,6 +4,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { LoaderComponent } from './components/loader/loader.component';
+import { SelectComponent } from './components/select/select.component';
 
 
 
@@ -11,7 +12,8 @@ import { LoaderComponent } from './components/loader/loader.component';
   declarations: [
     HeaderComponent,
     FooterComponent,
-    LoaderComponent
+    LoaderComponent,
+    SelectComponent
   ],
   imports: [
     CommonModule,
@@ -19,7 +21,8 @@ import { LoaderComponent } from './components/loader/loader.component';
   ],
   exports:[
     HeaderComponent,
-    LoaderComponent
+    LoaderComponent,
+    SelectComponent
   ]
 })
 export class SharedModule { }

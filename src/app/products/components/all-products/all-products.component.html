@@ -1,37 +1,11 @@
 
 <div class="filter-box w-25">
-  <label for="" class="m-2"><strong>Catigories:</strong> </label>
-  <select class="form-control" (change)="getSelectedCategory($event)">
-    <option  value="all" selected>All</option>
-    <option *ngFor="let cat of categories ; index" value="{{cat}}" >{{cat}}</option>
-  </select>
+  <app-select [data]="categories" [title]="'Categories'" (selectedValue)="getSelectedCategory($event)"></app-select>
 </div>
 <div *ngIf="!isLoading">
   <div class="container" *ngIf="products$ | async as products" >
     <div *ngFor="let product of products" class="card" >
-      <div class="card-head">
-        <div class="product-img pt-5">
-          <img src={{product.image}} alt="product-img">
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="product-desc">
-          <span class="product-title">
-            {{product.title}}
-          </span>
-          <div class="product-description">
-            <span style="color: black;">
-              {{product.description}}
-            </span>
-          </div>
-        </div>
-        <div class="product-properties">
-          <span class="product-price">
-            $<b>{{product.price}}</b>
-          </span>
-          <button>Add to cart</button>
-        </div>
-      </div>
+      <app-product [product]="product"></app-product>
     </div>
 </div>
 </div>
