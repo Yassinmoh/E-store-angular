@@ -1,11 +1,14 @@
+
 <div class="filter-box w-25">
   <label for="" class="m-2"><strong>Catigories:</strong> </label>
-  <select class="form-control" (change)="getEvent($event)">
+  <select class="form-control" (change)="getSelectedCategory($event)">
+    <option  value="all" selected>All</option>
     <option *ngFor="let cat of categories ; index" value="{{cat}}" >{{cat}}</option>
   </select>
 </div>
-<div class="container" *ngIf="products$ | async as products">
-    <div *ngFor="let product of products" class="card">
+<div *ngIf="!isLoading">
+  <div class="container" *ngIf="products$ | async as products" >
+    <div *ngFor="let product of products" class="card" >
       <div class="card-head">
         <div class="product-img pt-5">
           <img src={{product.image}} alt="product-img">
@@ -30,4 +33,9 @@
         </div>
       </div>
     </div>
+</div>
+</div>
+
+<div class="text-center w-100" *ngIf="isLoading">
+  <app-loader></app-loader>
 </div>

@@ -8,28 +8,43 @@ import { ProductsService } from '../../services/products.service';
 })
 export class AllProductsComponent implements OnInit {
 
-constructor(private productService:ProductsService){}
-  products$ =this.productService.getAllProducts()
-  categories :any[] =[]
+  constructor(private productService: ProductsService) { }
+  
+  products$ = this.productService.getAllProducts()
+  categories: any[] = []
+  isLoading: boolean = false;
 
-
-  getAllCategories(){
-      this.productService.getAllCategories().subscribe((data:any)=>{
+  getAllCategories() {
+    this.isLoading= true;
+    this.productService.getAllCategories().subscribe((data: any) => {
       this.categories = data
+      this.isLoading= false;
       console.log(this.categories);
     })
   }
 
-  getEvent(event:any){
-    let selectedCategory =event.target.value
-    console.log(selectedCategory);
-    this.filterProducts(selectedCategory)
+  getSelectedCategory(event: any) {
+    this.isLoading= true;
+    let value :any = event.target.value
+    value == 'all' ? this.productService.getAllProducts():this.filterProducts(value)
+    this.isLoading= false;
+      // this.products$ = this.productService.getAllProducts()
+
+      // console.log(selectedCategory);
+      // this.filterProducts(selectedCategory)
+
   }
 
-  filterProducts(key:any){
-    this.products$ =this.productService.getFilterProducts(key)
+  filterProducts(key: any) {
+    this.products$ = this.productService.getFilterProducts(key)
   }
+
+
+
+
   ngOnInit(): void {
     this.getAllCategories()
+
+
   }
 }
